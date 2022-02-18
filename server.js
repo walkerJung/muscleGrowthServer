@@ -1,16 +1,13 @@
-require("dotenv").config();
-import express from "express";
-import { ApolloServer } from "apollo-server-express";
-import { typeDefs, resolvers } from "./schema.js";
+// server.js
 
-const PORT = process.env.PORT;
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-});
+import { ApolloServer } from "apollo-server";
 
-const app = express();
-server.applyMiddleware({ app });
-app.listen({ port: PORT }, () => {
-  console.log(`🚀Server is running on http://localhost:${PORT} ✅`);
-});
+// 합쳐진 최종 schema불러오기
+import schema from "./schema";
+
+// schema로 ApolloServer 만들기
+const server = new ApolloServer({ schema });
+
+server
+  .listen()
+  .then(({ url }) => console.log(`🚀 Server is running on ${url}`));
