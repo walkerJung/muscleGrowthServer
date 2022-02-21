@@ -1,5 +1,3 @@
-// schema.js
-
 // typeDefs, resolver 파일 합칠때 사용
 import { makeExecutableSchema } from "@graphql-tools/schema";
 

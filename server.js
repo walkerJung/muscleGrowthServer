@@ -1,5 +1,3 @@
-// server.js
-
 import { ApolloServer } from "apollo-server";
 
 // 합쳐진 최종 schema불러오기

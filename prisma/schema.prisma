@@ -11,8 +11,101 @@ datasource db {
 }
 
 model User {
+  id             Int              @id @default(autoincrement())
+  userId         String           @unique
+  userName       String
+  userPassword   String
+  userType       String
+  userAgree      Boolean
+  createdAt      DateTime         @default(now())
+  Mapping        Mapping[]
+  MappingComment MappingComment[]
+  WorkoutLog     WorkoutLog[]
+}
+
+model Mapping {
+  id                  Int                @id @default(autoincrement())
+  userId              Int
+  User                User               @relation(fields: [userId], references: [id])
+  timeStamp           String             @unique
+  mappingType         String
+  mappingName         String
+  mappingTel          String
+  mappingBusinessHour String
+  mappingMuscleUp     Int
+  mappingMuscleDown   Int
+  createdAt           DateTime
+  MappingRestaurant   MappingRestaurant?
+  MappingGym          MappingGym?
+  MappingComment      MappingComment[]
+  MappingFile         MappingFile[]
+}
+
+model MappingRestaurant {
+  id                  Int      @id @default(autoincrement())
+  mappingId           Int      @unique
+  Mapping             Mapping  @relation(fields: [mappingId], references: [id])
+  restaurantMenu      String
+  restaurantNutrition String
+  restaurantTip       String
+  createdAt           DateTime @default(now())
+}
+
+model MappingGym {
+  id          Int      @id @default(autoincrement())
+  mappingId   Int      @unique
+  Mapping     Mapping  @relation(fields: [mappingId], references: [id])
+  gymFacility String
+  gymMood     String
+  gymGood     String
+  gymBad      String
+  createdAt   DateTime @default(now())
+}
+
+model MappingComment {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  User           User     @relation(fields: [userId], references: [id])
+  mappingId      Int      @unique
+  Mapping        Mapping  @relation(fields: [mappingId], references: [id])
+  commentContent String
+  createdAt      DateTime @default(now())
+}
+
+model MappingFile {
   id        Int      @id @default(autoincrement())
+  timeStamp String
+  Mapping   Mapping  @relation(fields: [timeStamp], references: [timeStamp])
+  imgSrc    String
+  imgName   String
+  imgType   String
   createdAt DateTime @default(now())
-  email     String   @unique
-  name      String?
+}
+
+model WorkoutLog {
+  id          Int           @id @default(autoincrement())
+  userId      Int
+  User        User          @relation(fields: [userId], references: [id])
+  createdAt   DateTime      @default(now())
+  WorkoutType WorkoutType[]
+}
+
+model WorkoutType {
+  id                 Int                  @id @default(autoincrement())
+  workoutLogId       Int
+  WorkoutLog         WorkoutLog           @relation(fields: [workoutLogId], references: [id])
+  workoutName        String
+  workoutComment     String
+  createdAt          DateTime             @default(now())
+  WorkoutPerformance WorkoutPerformance[]
+}
+
+model WorkoutPerformance {
+  id            Int         @id @default(autoincrement())
+  workoutTypeId Int
+  WorkoutType   WorkoutType @relation(fields: [workoutTypeId], references: [id])
+  workoutSet    Int
+  workoutCount  Int
+  workoutWeight Int
+  createdAt     DateTime    @default(now())
 }

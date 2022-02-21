@@ -1,5 +1,3 @@
-// books/books.typeDefs.js
-
 // 데이터 형식(typeDefs) 지정하기 위한 gql 불러오기
 import { gql } from "apollo-server";
 
