@@ -11,6 +11,12 @@ export default gql`
     createdAt: String!
   }
 
+  type UserResponse {
+    user: User
+    result: Boolean!
+    message: String!
+  }
+
   type Query {
     users: [User]
     user(id: Int!): User
@@ -23,8 +29,8 @@ export default gql`
       userPassword: String!
       userType: String!
       userAgree: Boolean!
-    ): User
-    updateUser(id: Int!, userName: String, userPassword: String): User
-    deleteUser(id: Int!): User
+    ): UserResponse
+    updateUser(id: Int!, userName: String, userPassword: String): UserResponse
+    deleteUser(id: Int!): UserResponse
   }
 `;
