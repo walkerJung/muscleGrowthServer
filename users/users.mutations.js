@@ -35,7 +35,7 @@ export default {
       return {
         user: newUser,
         result: true,
-        message: "회원가입이 완료되었습니다. 감사합니다",
+        message: "회원가입이 완료되었습니다. 감사합니다.",
       };
     },
     updateUser: async (_, { id, userName, userPassword }) => {

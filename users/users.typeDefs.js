@@ -12,14 +12,14 @@ export default gql`
   }
 
   type UserResponse {
-    user: User
+    user: User!
     result: Boolean!
     message: String!
   }
 
   type Query {
     users: [User]
-    user(id: Int!): User
+    user(id: Int!): User!
   }
 
   type Mutation {
@@ -29,8 +29,8 @@ export default gql`
       userPassword: String!
       userType: String!
       userAgree: Boolean!
-    ): UserResponse
-    updateUser(id: Int!, userName: String, userPassword: String): UserResponse
-    deleteUser(id: Int!): UserResponse
+    ): UserResponse!
+    updateUser(id: Int!, userName: String, userPassword: String): UserResponse!
+    deleteUser(id: Int!): UserResponse!
   }
 `;

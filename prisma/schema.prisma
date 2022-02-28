@@ -31,7 +31,9 @@ model Mapping {
   mappingType         String
   mappingName         String
   mappingTel          String
-  mappingBusinessHour String
+  mappingBusinessHour String              
+  mappingLatitude     String             @unique 
+  mappingLongitude    String             @unique
   mappingMuscleUp     Int
   mappingMuscleDown   Int
   createdAt           DateTime
