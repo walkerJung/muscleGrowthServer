@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  id             Int              @id @default(autoincrement())
+  code           Int              @id @default(autoincrement())
   userId         String           @unique
   userName       String
   userPassword   String
@@ -24,29 +24,29 @@ model User {
 }
 
 model Mapping {
-  id                  Int                @id @default(autoincrement())
-  userId              Int
-  User                User               @relation(fields: [userId], references: [id])
-  timeStamp           String             @unique
+  code                Int                 @id @default(autoincrement())
+  userCode            Int
+  User                User                @relation(fields: [userCode], references: [code])
+  timeStamp           String              @unique
   mappingType         String
   mappingName         String
   mappingTel          String
-  mappingBusinessHour String              
-  mappingLatitude     String             @unique 
-  mappingLongitude    String             @unique
+  mappingBusinessHour String
+  mappingLatitude     String              @unique
+  mappingLongitude    String              @unique
   mappingMuscleUp     Int
   mappingMuscleDown   Int
   createdAt           DateTime
-  MappingRestaurant   MappingRestaurant?
-  MappingGym          MappingGym?
+  MappingRestaurant   MappingRestaurant[]
+  MappingGym          MappingGym[]
   MappingComment      MappingComment[]
   MappingFile         MappingFile[]
 }
 
 model MappingRestaurant {
-  id                  Int      @id @default(autoincrement())
-  mappingId           Int      @unique
-  Mapping             Mapping  @relation(fields: [mappingId], references: [id])
+  code                Int      @id @default(autoincrement())
+  mappingCode         Int      @unique
+  Mapping             Mapping  @relation(fields: [mappingCode], references: [code])
   restaurantMenu      String
   restaurantNutrition String
   restaurantTip       String
@@ -54,9 +54,9 @@ model MappingRestaurant {
 }
 
 model MappingGym {
-  id          Int      @id @default(autoincrement())
-  mappingId   Int      @unique
-  Mapping     Mapping  @relation(fields: [mappingId], references: [id])
+  code        Int      @id @default(autoincrement())
+  mappingCode Int      @unique
+  Mapping     Mapping  @relation(fields: [mappingCode], references: [code])
   gymFacility String
   gymMood     String
   gymGood     String
@@ -65,17 +65,17 @@ model MappingGym {
 }
 
 model MappingComment {
-  id             Int      @id @default(autoincrement())
-  userId         Int
-  User           User     @relation(fields: [userId], references: [id])
-  mappingId      Int      @unique
-  Mapping        Mapping  @relation(fields: [mappingId], references: [id])
+  code           Int      @id @default(autoincrement())
+  userCode       Int
+  User           User     @relation(fields: [userCode], references: [code])
+  mappingCode    Int      @unique
+  Mapping        Mapping  @relation(fields: [mappingCode], references: [code])
   commentContent String
   createdAt      DateTime @default(now())
 }
 
 model MappingFile {
-  id        Int      @id @default(autoincrement())
+  code      Int      @id @default(autoincrement())
   timeStamp String
   Mapping   Mapping  @relation(fields: [timeStamp], references: [timeStamp])
   imgSrc    String
@@ -85,17 +85,17 @@ model MappingFile {
 }
 
 model WorkoutLog {
-  id          Int           @id @default(autoincrement())
-  userId      Int
-  User        User          @relation(fields: [userId], references: [id])
+  code        Int           @id @default(autoincrement())
+  userCode    Int
+  User        User          @relation(fields: [userCode], references: [code])
   createdAt   DateTime      @default(now())
   WorkoutType WorkoutType[]
 }
 
 model WorkoutType {
-  id                 Int                  @id @default(autoincrement())
-  workoutLogId       Int
-  WorkoutLog         WorkoutLog           @relation(fields: [workoutLogId], references: [id])
+  code               Int                  @id @default(autoincrement())
+  workoutLogCode     Int
+  WorkoutLog         WorkoutLog           @relation(fields: [workoutLogCode], references: [code])
   workoutName        String
   workoutComment     String
   createdAt          DateTime             @default(now())
@@ -103,11 +103,11 @@ model WorkoutType {
 }
 
 model WorkoutPerformance {
-  id            Int         @id @default(autoincrement())
-  workoutTypeId Int
-  WorkoutType   WorkoutType @relation(fields: [workoutTypeId], references: [id])
-  workoutSet    Int
-  workoutCount  Int
-  workoutWeight Int
-  createdAt     DateTime    @default(now())
+  code            Int         @id @default(autoincrement())
+  workoutTypeCode Int
+  WorkoutType     WorkoutType @relation(fields: [workoutTypeCode], references: [code])
+  workoutSet      Int
+  workoutCount    Int
+  workoutWeight   Int
+  createdAt       DateTime    @default(now())
 }

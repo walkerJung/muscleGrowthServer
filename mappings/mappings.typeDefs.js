@@ -2,8 +2,7 @@ import { gql } from "apollo-server";
 
 export default gql`
   type Mapping {
-    id: Int!
-    userId: Int!
+    code: Int!
     timeStamp: String!
     mappingType: String!
     mappingName: String!
@@ -22,26 +21,26 @@ export default gql`
 
   type Query {
     mappings: [Mapping]
-    mapping(id: Int!): Mapping!
+    mapping(code: Int!): Mapping!
   }
 
   type Mutation {
     createMapping(
-      userId: Int!
+      userCode: Int!
       timeStamp: String!
       mappingType: String!
       mappingName: String!
       mappingTel: String!
       mappingBusinessHour: String!
-      mappingMuscleUp: Int!
-      mappingMuscleDown: Int!
+      mappingLatitude: String!
+      mappingLongitude: String!
     ): MappingResponse!
     updateMapping(
-      id: Int!
+      code: Int!
       mappingName: String!
       mappingTel: String!
       mappingBusinessHour: String!
     ): MappingResponse!
-    deleteMapping(id: Int!): MappingResponse!
+    deleteMapping(code: Int!): MappingResponse!
   }
 `;

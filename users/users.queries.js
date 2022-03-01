@@ -3,6 +3,6 @@ import client from "../client";
 export default {
   Query: {
     users: () => client.user.findMany(),
-    user: (_, { id }) => client.user.findUnique({ where: { id } }),
+    user: (_, { code }) => client.user.findUnique({ where: { code } }),
   },
 };

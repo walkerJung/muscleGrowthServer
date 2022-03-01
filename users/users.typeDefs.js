@@ -2,7 +2,7 @@ import { gql } from "apollo-server";
 
 export default gql`
   type User {
-    id: Int!
+    code: Int!
     userId: String!
     userName: String!
     userPassword: String!
@@ -19,7 +19,7 @@ export default gql`
 
   type Query {
     users: [User]
-    user(id: Int!): User!
+    user(code: Int!): User!
   }
 
   type Mutation {
@@ -30,7 +30,11 @@ export default gql`
       userType: String!
       userAgree: Boolean!
     ): UserResponse!
-    updateUser(id: Int!, userName: String, userPassword: String): UserResponse!
-    deleteUser(id: Int!): UserResponse!
+    updateUser(
+      code: Int!
+      userName: String
+      userPassword: String
+    ): UserResponse!
+    deleteUser(code: Int!): UserResponse!
   }
 `;
