@@ -51,10 +51,9 @@ export default {
       };
     },
     deleteUser: async (_, { code }) => {
-      const deleteUser = await client.user.delete({ where: { code } });
+      await client.user.delete({ where: { code } });
 
       return {
-        user: deleteUser,
         result: true,
         message: "회원정보 삭제가 완료되었습니다. 이용해주셔서 감사합니다.",
       };

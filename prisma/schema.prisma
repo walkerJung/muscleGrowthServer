@@ -36,7 +36,7 @@ model Mapping {
   mappingLongitude    String              @unique
   mappingMuscleUp     Int
   mappingMuscleDown   Int
-  createdAt           DateTime
+  createdAt           DateTime            @default(now())
   MappingRestaurant   MappingRestaurant[]
   MappingGym          MappingGym[]
   MappingComment      MappingComment[]

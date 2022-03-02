@@ -14,7 +14,7 @@ export default gql`
   }
 
   type MappingResponse {
-    mapping: Mapping!
+    mapping: Mapping
     result: Boolean!
     message: String!
   }
@@ -34,6 +34,13 @@ export default gql`
       mappingBusinessHour: String!
       mappingLatitude: String!
       mappingLongitude: String!
+      restaurantMenu: String
+      restaurantNutrition: String
+      restaurantTip: String
+      gymFacility: String
+      gymMood: String
+      gymGood: String
+      gymBad: String
     ): MappingResponse!
     updateMapping(
       code: Int!

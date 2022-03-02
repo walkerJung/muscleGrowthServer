@@ -12,7 +12,7 @@ export default gql`
   }
 
   type UserResponse {
-    user: User!
+    user: User
     result: Boolean!
     message: String!
   }
