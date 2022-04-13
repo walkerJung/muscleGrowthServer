@@ -40,61 +40,78 @@ export default {
       }
 
       if (mappingType == "restaurant") {
-        const newMapping = await client.mapping.create({
-          data: {
-            userCode,
-            timeStamp,
-            mappingType,
-            mappingName,
-            mappingTel,
-            mappingBusinessHour,
-            mappingMuscleUp: 0,
-            mappingMuscleDown: 0,
-            mappingLatitude,
-            mappingLongitude,
-            MappingRestaurant: {
-              create: {
-                restaurantMenu,
-                restaurantNutrition,
-                restaurantTip,
+        try {
+          const newMapping = await client.mapping.create({
+            data: {
+              userCode,
+              timeStamp,
+              mappingType,
+              mappingName,
+              mappingTel,
+              mappingBusinessHour,
+              mappingMuscleUp: 0,
+              mappingMuscleDown: 0,
+              mappingLatitude,
+              mappingLongitude,
+              MappingRestaurant: {
+                create: {
+                  restaurantMenu,
+                  restaurantNutrition,
+                  restaurantTip,
+                },
               },
             },
-          },
-        });
+          });
 
-        return {
-          mapping: newMapping,
-          result: true,
-          message: "맵핑정보 등록이 완료되었습니다. 감사합니다.",
-        };
+          return {
+            mapping: newMapping,
+            result: true,
+            message: "맵핑정보 등록이 완료되었습니다. 감사합니다.",
+          };
+        } catch (err) {
+          return {
+            mapping: [],
+            result: false,
+            message: err,
+          };
+        }
       } else if (mappingType == "gym") {
-        const newMapping = await client.mapping.create({
-          data: {
-            timeStamp,
-            mappingType,
-            mappingName,
-            mappingTel,
-            mappingBusinessHour,
-            mappingMuscleUp: 0,
-            mappingMuscleDown: 0,
-            mappingLatitude,
-            mappingLongitude,
-            MappingGym: {
-              create: {
-                gymFacility,
-                gymMood,
-                gymGood,
-                gymBad,
+        try {
+          const newMapping = await client.mapping.create({
+            data: {
+              userCode,
+              timeStamp,
+              mappingType,
+              mappingName,
+              mappingTel,
+              mappingBusinessHour,
+              mappingMuscleUp: 0,
+              mappingMuscleDown: 0,
+              mappingLatitude,
+              mappingLongitude,
+              MappingGym: {
+                create: {
+                  gymFacility,
+                  gymMood,
+                  gymGood,
+                  gymBad,
+                },
               },
             },
-          },
-        });
+          });
 
-        return {
-          mapping: newMapping,
-          result: true,
-          message: "맵핑정보 등록이 완료되었습니다. 감사합니다.",
-        };
+          return {
+            mapping: newMapping,
+            result: true,
+            message: "맵핑정보 등록이 완료되었습니다. 감사합니다.",
+          };
+        } catch (err) {
+          return {
+            mapping: [],
+            result: false,
+            message: err,
+          };
+        }
       }
     },
     updateMapping: async (
